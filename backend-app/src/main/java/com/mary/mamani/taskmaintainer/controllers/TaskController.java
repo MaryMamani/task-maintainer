@@ -5,6 +5,9 @@ import com.mary.mamani.taskmaintainer.models.Task;
 import com.mary.mamani.taskmaintainer.services.TaskService;
 import com.mary.mamani.taskmaintainer.utils.constants.Endpoints;
 import com.mary.mamani.taskmaintainer.utils.constants.Paths;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -26,28 +29,42 @@ public class TaskController {
   private final TaskService taskService;
 
   @PostMapping
+  @Operation(summary = "Create task")
+  @ApiResponse(responseCode = "200", description = "Tasks created")
   public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDto taskDto) {
     return ResponseEntity.ok(taskService.createTask(taskDto));
   }
 
   @GetMapping
+  @Operation(summary = "Get all tasks")
+  @ApiResponse(responseCode = "200", description = "Tasks found")
   public ResponseEntity<List<Task>> getAllTasks() {
     return ResponseEntity.ok(taskService.getAllTasks());
   }
 
   @GetMapping(Paths.Task.TASK_ID)
-  public ResponseEntity<Task> getTaskById(@PathVariable Long taskId) {
+  @Operation(summary = "Get task by id")
+  @ApiResponse(responseCode = "200", description = "Tasks found")
+  public ResponseEntity<Task> getTaskById(
+      @Parameter(description = "Task ID to find") @PathVariable Long taskId) {
     return ResponseEntity.ok(taskService.getTaskById(taskId));
   }
 
   @DeleteMapping(Paths.Task.TASK_ID)
-  public ResponseEntity<Void> deleteTaskById(@PathVariable Long taskId) {
+  @Operation(summary = "Delete task by id")
+  @ApiResponse(responseCode = "200", description = "Task deleted")
+  public ResponseEntity<Void> deleteTaskById(
+      @Parameter(description = "Task ID to delete") @PathVariable Long taskId) {
     taskService.deleteTaskById(taskId);
     return ResponseEntity.ok().build();
   }
 
   @PutMapping(Paths.Task.TASK_ID)
-  public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @Valid @RequestBody TaskDto taskDto) {
+  @Operation(summary = "Update task by id")
+  @ApiResponse(responseCode = "200", description = "Task updated")
+  public ResponseEntity<Task> updateTask(
+      @Parameter(description = "Task ID to update", required = true) @PathVariable Long taskId,
+      @Valid @RequestBody TaskDto taskDto) {
     Task taskUpdated = taskService.updateTask(taskId, taskDto);
     return ResponseEntity.ok(taskUpdated);
   }
