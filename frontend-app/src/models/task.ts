@@ -6,3 +6,18 @@ export interface Task {
   description: string;
   inForce: boolean;
 }
+
+export interface TaskRequest {
+  id: number;
+  title: string;
+  description: string;
+  inForce: boolean;
+}
+
+export interface TaskResponse {
+  id: number;
+  title: string;
+  description: string;
+  createdAt: Date;
+  inForce: boolean;
+}
