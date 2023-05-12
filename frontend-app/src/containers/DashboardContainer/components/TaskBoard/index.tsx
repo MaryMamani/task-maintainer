@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import React from "react";
 import TaskCard from "../../../../components/TaskCard";
-import { Task } from "../../../../models/task";
+import { TaskResponse } from "../../../../models/task";
 
 interface TaskBoardProps {
-  tasks: Task[];
+  tasks?: TaskResponse[];
   onDelete: (id: number) => void;
 }
 
@@ -18,7 +18,7 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ tasks, onDelete }) => {
         p: 3,
       }}
     >
-      {tasks.map((task) => (
+      {tasks?.map((task) => (
         <TaskCard task={task} onDelete={() => onDelete(task.id)} />
       ))}
     </Box>

@@ -10,12 +10,12 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import { FieldDescriptionStyle, FieldTitleStyle } from "./style";
-import { Task } from "../../models/task";
+import { TaskResponse } from "../../models/task";
 
 interface EditTaskModalProps {
   open: boolean;
   onClose: () => void;
-  task: Task;
+  task: TaskResponse;
 }
 
 const EditTaskModal: React.FC<EditTaskModalProps> = ({

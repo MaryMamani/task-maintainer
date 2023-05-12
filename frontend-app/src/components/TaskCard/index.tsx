@@ -18,15 +18,15 @@ import {
   TitleStyle,
 } from "./style";
 import EditTaskModal from "../EditTaskModal";
-import { Task } from "../../models/task";
+import { TaskResponse } from "../../models/task";
 
 interface TaskCardProps {
-  task: Task;
+  task: TaskResponse;
   onDelete: () => void;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
-  const { title, date, time, description, inForce } = task;
+  const { id, title, description, createdAt, inForce } = task;
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const handleOpen = () => {
@@ -45,17 +45,17 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
     <>
       <Card onClick={handleOpen}>
         <CardContent>
-          <Typography sx={DateStyle}>{date.toDateString()}</Typography>
+          <Typography sx={DateStyle}>{createdAt.toDateString()}</Typography>
           <Typography sx={TitleStyle}>{title}</Typography>
-          <Typography sx={TimeStyle}>{time.toLocaleTimeString()}</Typography>
+          <Typography sx={TimeStyle}>{createdAt.toLocaleTimeString()}</Typography>
         </CardContent>
       </Card>
       <Dialog fullWidth open={open} onClose={handleClose}>
         <DialogTitle sx={TitleStyle}>{title}</DialogTitle>
         <DialogContent dividers>
-          <Typography sx={DateStyle}>{date.toDateString()}</Typography>
+          <Typography sx={DateStyle}>{createdAt.toDateString()}</Typography>
           <Typography sx={TextDescriptionStyle}>{description}</Typography>
-          <Typography sx={TextInForceStyle}>Vigente</Typography>
+          <Typography sx={TextInForceStyle}>Vigente = {inForce}</Typography>
         </DialogContent>
         <DialogActions>
           <Delete onClick={onDelete} sx={ActionIconStyle} />
