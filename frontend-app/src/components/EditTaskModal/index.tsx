@@ -6,29 +6,31 @@ import {
   TextField,
   DialogActions,
   Button,
+  Switch,
+  FormControlLabel,
 } from "@mui/material";
 import { FieldDescriptionStyle, FieldTitleStyle } from "./style";
+import { Task } from "../../models/task";
 
 interface EditTaskModalProps {
   open: boolean;
   onClose: () => void;
-  onSave: (title: string, description: string) => void;
-  title: string;
-  description: string;
+  task: Task;
 }
 
 const EditTaskModal: React.FC<EditTaskModalProps> = ({
   open,
   onClose,
-  onSave,
-  title,
-  description,
+  task,
 }) => {
+  const { title, description, inForce } = task;
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
+  const [isInForce, setInForce] = useState<boolean>(inForce);
 
   const handleSave = () => {
-    onSave(newTitle, newDescription);
+    //Aqui mi API
+    //onSave(newTitle, newDescription, isInForce);
     onClose();
   };
 
@@ -50,6 +52,16 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
           fullWidth
           multiline
           sx={FieldDescriptionStyle}
+        />
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isInForce}
+              onChange={(e) => setInForce(e.target.checked)}
+              color="primary"
+            />
+          }
+          label="Vigente"
         />
       </DialogContent>
       <DialogActions>

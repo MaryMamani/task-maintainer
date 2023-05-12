@@ -4,5 +4,5 @@ export interface Task {
   date: Date;
   time: Date;
   description: string;
-  isCompleted: boolean;
+  inForce: boolean;
 }

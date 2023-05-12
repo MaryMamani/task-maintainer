@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Close, Delete, Edit } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import {
   Card,
   CardContent,
@@ -7,12 +7,10 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
   Typography,
 } from "@mui/material";
 import {
   ActionIconStyle,
-  CloseIconStyle,
   DateStyle,
   TextDescriptionStyle,
   TextInForceStyle,
@@ -20,28 +18,15 @@ import {
   TitleStyle,
 } from "./style";
 import EditTaskModal from "../EditTaskModal";
+import { Task } from "../../models/task";
 
 interface TaskCardProps {
-  title: string;
-  date: Date;
-  time: Date;
-  description: string;
-  isCompleted: boolean;
-  onToggle: () => void;
-  onEdit: () => void;
+  task: Task;
   onDelete: () => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({
-  title,
-  date,
-  time,
-  description,
-  isCompleted,
-  onToggle,
-  onEdit,
-  onDelete,
-}) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
+  const { title, date, time, description, inForce } = task;
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const handleOpen = () => {
@@ -62,7 +47,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
         <CardContent>
           <Typography sx={DateStyle}>{date.toDateString()}</Typography>
           <Typography sx={TitleStyle}>{title}</Typography>
-          <Typography sx={TimeStyle}>{date.toLocaleTimeString()}</Typography>
+          <Typography sx={TimeStyle}>{time.toLocaleTimeString()}</Typography>
         </CardContent>
       </Card>
       <Dialog fullWidth open={open} onClose={handleClose}>
@@ -80,9 +65,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
       <EditTaskModal
         open={editOpen}
         onClose={() => setEditOpen(false)}
-        onSave={(editedTitle, editedDescription) => {}}
-        title={"sdsdfds"}
-        description={"dsfd"}
+        task={task}
       />
     </>
   );

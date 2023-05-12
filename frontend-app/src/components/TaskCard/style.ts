@@ -16,6 +16,7 @@ export const TimeStyle = {
 
 export const TextDescriptionStyle = {
   paddingBottom: "3%",
+  minHeight: "300px"
 };
 
 export const TextInForceStyle = {

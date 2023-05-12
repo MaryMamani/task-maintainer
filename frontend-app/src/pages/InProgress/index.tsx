@@ -6,13 +6,7 @@ import { tasksMocked } from "../../utilities/mocks/taskMocks";
 const InProgress = () => {
   const [tasks, setTasks] = useState(tasksMocked)
 
-  const handleToggle = (taskId: number) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, valid: !task.isCompleted } : task
-      )
-    );
-  };
+  //Aqui llamar al store de redux
 
   const handleDelete = (taskId: number) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
@@ -20,7 +14,7 @@ const InProgress = () => {
 
   return (
     <div>
-      <TaskBoard tasks={tasks} onToggle={handleToggle} onEdit={handleDelete} />
+      <TaskBoard tasks={tasks} onDelete={handleDelete} />
     </div>
   );
 };
