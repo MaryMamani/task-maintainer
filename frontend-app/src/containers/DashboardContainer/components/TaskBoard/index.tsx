@@ -5,10 +5,9 @@ import { TaskResponse } from "../../../../models/task";
 
 interface TaskBoardProps {
   tasks?: TaskResponse[];
-  onDelete: (id: number) => void;
 }
 
-const TaskBoard: React.FC<TaskBoardProps> = ({ tasks, onDelete }) => {
+const TaskBoard: React.FC<TaskBoardProps> = ({ tasks }) => {
   return (
     <Box
       sx={{
@@ -19,7 +18,7 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ tasks, onDelete }) => {
       }}
     >
       {tasks?.map((task) => (
-        <TaskCard key={task.id} task={task} onDelete={() => onDelete(task.id)} />
+        <TaskCard key={task.id} task={task} />
       ))}
     </Box>
   );

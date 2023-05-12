@@ -19,17 +19,23 @@ import {
 } from "./style";
 import EditTaskModal from "../EditTaskModal";
 import { TaskResponse } from "../../models/task";
+import {
+  useDeleteTaskMutation,
+  useGetTasksQuery,
+} from "../../services/taskApi";
 
 interface TaskCardProps {
   task: TaskResponse;
-  onDelete: () => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const { id, title, description, createdAt, inForce } = task;
-  const [dateString, timeString] = createdAt.split(' ');
+  const [dateString, timeString] = createdAt.split(" ");
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [deleteTask] = useDeleteTaskMutation();
+  const { refetch } = useGetTasksQuery();
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -42,6 +48,13 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
     setOpen(false);
     setEditOpen(true);
   };
+
+  const handleDelete = () => {
+    deleteTask(id);
+    setOpen(false);
+    refetch();
+  };
+
   return (
     <>
       <Card onClick={handleOpen}>
@@ -56,10 +69,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
         <DialogContent dividers>
           <Typography sx={DateStyle}>{dateString}</Typography>
           <Typography sx={TextDescriptionStyle}>{description}</Typography>
-          {inForce ? <Typography sx={TextInForceStyle}>Vigente</Typography> : null}
+          {inForce ? (
+            <Typography sx={TextInForceStyle}>Vigente</Typography>
+          ) : null}
         </DialogContent>
         <DialogActions>
-          <Delete onClick={onDelete} sx={ActionIconStyle} />
+          <Delete onClick={handleDelete} sx={ActionIconStyle} />
           <Edit onClick={handleEdit} sx={ActionIconStyle} />
         </DialogActions>
       </Dialog>
