@@ -7,7 +7,7 @@ import { SidebarStyle, SidebarBoxStyle } from "./style";
 const Sidebar = () => (
   <Box sx={SidebarStyle}>
     <Box sx={SidebarBoxStyle}>
-      <Box component="img" alt="logo-sidebar" src={"/logo-name.png"} />
+      <Box component="img" alt="logo-sidebar" src={"/name.png"} />
       <Box style={{ flex: 1 }}>
         <List>
           {sidebarItems.map((item, index) => (

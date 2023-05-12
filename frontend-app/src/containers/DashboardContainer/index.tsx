@@ -9,7 +9,6 @@ const DashboardContainer = () => {
     <Box sx={DashboardContainerStyle}>
       <Sidebar />
       <Box sx={ContentBoxStyle}>
-        <h1> dashboard</h1>
         <Outlet />
       </Box>
     </Box>
