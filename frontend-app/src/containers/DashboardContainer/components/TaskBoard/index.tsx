@@ -15,6 +15,7 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ tasks, onDelete }) => {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         gap: 2,
+        p: 3,
       }}
     >
       {tasks.map((task) => (
