@@ -56,7 +56,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
         <DialogContent dividers>
           <Typography sx={DateStyle}>{dateString}</Typography>
           <Typography sx={TextDescriptionStyle}>{description}</Typography>
-          <Typography sx={TextInForceStyle}>Vigente = {inForce}</Typography>
+          {inForce ? <Typography sx={TextInForceStyle}>Vigente</Typography> : null}
         </DialogContent>
         <DialogActions>
           <Delete onClick={onDelete} sx={ActionIconStyle} />
