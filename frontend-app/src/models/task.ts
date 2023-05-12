@@ -18,6 +18,6 @@ export interface TaskResponse {
   id: number;
   title: string;
   description: string;
-  createdAt: Date;
+  createdAt: string;
   inForce: boolean;
 }

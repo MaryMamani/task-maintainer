@@ -27,6 +27,7 @@ interface TaskCardProps {
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
   const { id, title, description, createdAt, inForce } = task;
+  const [dateString, timeString] = createdAt.split(' ');
   const [open, setOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const handleOpen = () => {
@@ -45,15 +46,15 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
     <>
       <Card onClick={handleOpen}>
         <CardContent>
-          <Typography sx={DateStyle}>{createdAt.toDateString()}</Typography>
+          <Typography sx={DateStyle}>{dateString}</Typography>
           <Typography sx={TitleStyle}>{title}</Typography>
-          <Typography sx={TimeStyle}>{createdAt.toLocaleTimeString()}</Typography>
+          <Typography sx={TimeStyle}>{timeString}</Typography>
         </CardContent>
       </Card>
       <Dialog fullWidth open={open} onClose={handleClose}>
         <DialogTitle sx={TitleStyle}>{title}</DialogTitle>
         <DialogContent dividers>
-          <Typography sx={DateStyle}>{createdAt.toDateString()}</Typography>
+          <Typography sx={DateStyle}>{dateString}</Typography>
           <Typography sx={TextDescriptionStyle}>{description}</Typography>
           <Typography sx={TextInForceStyle}>Vigente = {inForce}</Typography>
         </DialogContent>

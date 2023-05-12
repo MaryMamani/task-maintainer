@@ -19,7 +19,7 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ tasks, onDelete }) => {
       }}
     >
       {tasks?.map((task) => (
-        <TaskCard task={task} onDelete={() => onDelete(task.id)} />
+        <TaskCard key={task.id} task={task} onDelete={() => onDelete(task.id)} />
       ))}
     </Box>
   );
