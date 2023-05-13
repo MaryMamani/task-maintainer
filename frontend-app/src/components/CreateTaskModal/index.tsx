@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -6,7 +7,11 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import React, { useState } from "react";
+import { TaskRequest } from "../../models/task";
+import {
+  useCreateTaskMutation,
+  useGetTasksQuery,
+} from "../../services/taskApi";
 import { FieldTitleStyle, FieldDescriptionStyle } from "../EditTaskModal/style";
 
 interface CreateTaskModalProps {
@@ -17,9 +22,17 @@ interface CreateTaskModalProps {
 const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [createTask] = useCreateTaskMutation();
+  const { refetch } = useGetTasksQuery();
 
-  const handleSave = () => {
-    //llamar al API
+  const handleSave = async () => {
+    const taskToSave: TaskRequest = {
+      title: title,
+      description: description,
+      inForce: true,
+    };
+    await createTask(taskToSave);
+    refetch();
     setTitle("");
     setDescription("");
     onClose();

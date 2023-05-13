@@ -23,7 +23,7 @@ export const Home = () => (
     <Button
       variant="contained"
       component={Link}
-      to="/dashboard"
+      to="/dashboard/open"
       sx={{ mt: 4 }}
       color="secondary"
     >

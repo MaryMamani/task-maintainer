@@ -10,7 +10,11 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import { FieldDescriptionStyle, FieldTitleStyle } from "./style";
-import { TaskResponse } from "../../models/task";
+import { TaskRequest, TaskResponse, TaskUpdate } from "../../models/task";
+import {
+  useGetTasksQuery,
+  useUpdateTaskMutation,
+} from "../../services/taskApi";
 
 interface EditTaskModalProps {
   open: boolean;
@@ -23,14 +27,25 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   onClose,
   task,
 }) => {
-  const { title, description, inForce } = task;
+  const { title, description, inForce, id } = task;
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
   const [isInForce, setInForce] = useState<boolean>(inForce);
+  const [updateTask] = useUpdateTaskMutation();
+  const { refetch } = useGetTasksQuery();
 
-  const handleSave = () => {
-    //Aqui mi API
-    //onSave(newTitle, newDescription, isInForce);
+  const handleSave = async () => {
+    const newTask: TaskRequest = {
+      title: newTitle,
+      description: newDescription,
+      inForce: isInForce,
+    };
+    const taskToUpdate: TaskUpdate = {
+      id: task.id,
+      data: newTask,
+    };
+    await updateTask(taskToUpdate);
+    refetch();
     onClose();
   };
 

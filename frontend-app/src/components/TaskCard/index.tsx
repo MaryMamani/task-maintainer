@@ -49,10 +49,10 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     setEditOpen(true);
   };
 
-  const handleDelete = () => {
-    deleteTask(id);
-    setOpen(false);
+  const handleDelete = async () => {
+    await deleteTask(id);
     refetch();
+    setOpen(false);
   };
 
   return (

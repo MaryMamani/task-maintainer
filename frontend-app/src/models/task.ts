@@ -8,7 +8,6 @@ export interface Task {
 }
 
 export interface TaskRequest {
-  id: number;
   title: string;
   description: string;
   inForce: boolean;
@@ -20,4 +19,9 @@ export interface TaskResponse {
   description: string;
   createdAt: string;
   inForce: boolean;
+}
+
+export interface TaskUpdate {
+  id: number;
+  data: TaskRequest;
 }

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { TaskRequest, TaskResponse } from '../models/task';
+import { TaskRequest, TaskResponse, TaskUpdate } from '../models/task';
 import { APPLICATION_JSON, DELETE, POST, PUT } from '../utilities/constants/fetchQuery';
 
 export const taskApi = createApi({
@@ -19,8 +19,8 @@ export const taskApi = createApi({
           body: JSON.stringify(data),
         }),
       }),
-      updateTask: builder.mutation<TaskResponse, {id: number; task: TaskRequest}>({
-        query: ({id, ...data }) => ({
+      updateTask: builder.mutation<TaskResponse, TaskUpdate>({
+        query: ({id, data}) => ({
           url: `tasks/${id}`,
           method: PUT,
           headers: {
