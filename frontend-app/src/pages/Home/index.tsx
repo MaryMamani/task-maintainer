@@ -13,7 +13,7 @@ export const Home = () => (
     }}
   >
     <img
-      src="/home.svg"
+      src="/nuevo.svg"
       alt="Task illustration"
       style={{ height: "50%", objectPosition: "center" }}
     />
