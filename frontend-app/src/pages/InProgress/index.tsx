@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import TaskBoard from "../../containers/DashboardContainer/components/TaskBoard";
-import { tasksMocked } from "../../utilities/mocks/taskMocks";
 import { useGetTasksQuery } from "../../services/taskApi";
 
 const InProgress = () => {
-  const [tasks, setTasks] = useState(tasksMocked);
   const { data, isLoading, isError } = useGetTasksQuery();
+
+  const tasksInProgress = data?.filter(task => task.inForce === true);
 
   return (
     <div>
-      <TaskBoard tasks={data} />
+      <TaskBoard tasks={tasksInProgress} />
     </div>
   );
 };
