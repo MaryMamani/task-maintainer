@@ -23,7 +23,6 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#extra-step">Extra Step</a></li>
       </ul>
     </li>
     <li>
@@ -85,6 +84,11 @@ This project is a Full Stack application
 4. Create the following database in Postgres
     ```sh
     CREATE DATABASE taskdb;
+    ```
+    
+5. Execute the scripts to create the necessary tables, located in:
+    ```sh
+    cd scripts
     ```
 
 ## Usage
