@@ -14,3 +14,10 @@ export const FieldDescriptionStyle = {
     alignItems: "flex-start",
   },
 };
+
+export const ButtonStyle = {
+  backgroundColor: "#ccdde9",
+  "&:hover": {
+    backgroundColor: "#b3ccde",
+  },
+};

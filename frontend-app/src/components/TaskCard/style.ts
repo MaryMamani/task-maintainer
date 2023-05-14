@@ -25,12 +25,18 @@ export const TextInForceStyle = {
   color: "#04a99d",
 };
 
-export const ActionIconStyle = {
-  px: "14px",
+export const DeleteStyle = {
+  backgroundColor: "rgba(255, 0, 0, 0.1)",
+  "&:hover": {
+    backgroundColor: "rgba(255, 0, 0, 0.2)",
+  },
+  color: "#ff6584",
 };
 
-export const CloseIconStyle = {
-  position: "absolute",
-  right: 8,
-  top: 8,
+export const EditStyle = {
+  backgroundColor: "#e7f7f4",
+  "&:hover": {
+    backgroundColor: "#a0e1d1",
+  },
+  color: "#12b38d",
 };

@@ -8,12 +8,12 @@ interface SidebarItems {
 
 export const sidebarItems: Array<SidebarItems> = [
   {
-    title: "In Progress",
+    title: "En Progreso",
     linkToNavigate: "open",
     Icon: AccessTime,
   },
   {
-    title: "Finished",
+    title: "Finalizado",
     linkToNavigate: "close",
     Icon: DoneAll,
   },

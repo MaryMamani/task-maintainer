@@ -9,7 +9,7 @@ import {
   Switch,
   FormControlLabel,
 } from "@mui/material";
-import { FieldDescriptionStyle, FieldTitleStyle } from "./style";
+import { ButtonStyle, FieldDescriptionStyle, FieldTitleStyle } from "./style";
 import { TaskRequest, TaskResponse, TaskUpdate } from "../../models/task";
 import {
   useGetTasksQuery,
@@ -120,7 +120,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancelar</Button>
-        <Button onClick={handleSave}>Guardar</Button>
+        <Button onClick={handleSave} sx={ButtonStyle} >Guardar</Button>
       </DialogActions>
     </Dialog>
   );
