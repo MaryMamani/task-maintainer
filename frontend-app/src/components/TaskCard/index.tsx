@@ -61,7 +61,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         <CardContent>
           <Typography sx={DateStyle}>{dateString}</Typography>
           <Typography sx={TitleStyle}>{title}</Typography>
-          <Typography sx={TimeStyle}>{timeString}</Typography>
+          <Typography sx={TimeStyle}>{timeString + " hrs"}</Typography>
         </CardContent>
       </Card>
       <Dialog fullWidth open={open} onClose={handleClose}>

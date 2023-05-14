@@ -7,6 +7,8 @@ export const TitleStyle = {
   fontSize: "150%",
   color: "#005691",
   fontWeight: "400",
+  overflow: "auto",
+  wordWrap: "break-word",
 };
 
 export const TimeStyle = {
@@ -16,7 +18,7 @@ export const TimeStyle = {
 
 export const TextDescriptionStyle = {
   paddingBottom: "3%",
-  minHeight: "300px"
+  minHeight: "300px",
 };
 
 export const TextInForceStyle = {
