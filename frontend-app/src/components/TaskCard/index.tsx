@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
 import {
+  Button,
   Card,
   CardContent,
   Dialog,
@@ -10,8 +11,9 @@ import {
   Typography,
 } from "@mui/material";
 import {
-  ActionIconStyle,
   DateStyle,
+  DeleteStyle,
+  EditStyle,
   TextDescriptionStyle,
   TextInForceStyle,
   TimeStyle,
@@ -69,13 +71,21 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         <DialogContent dividers>
           <Typography sx={DateStyle}>{dateString}</Typography>
           <Typography sx={TextDescriptionStyle}>{description}</Typography>
-          {inForce ? (
-            <Typography sx={TextInForceStyle}>Vigente</Typography>
-          ) : null}
+          <Typography sx={TextInForceStyle}>
+            {inForce ? "Vigente" : "Finalizado"}
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Delete onClick={handleDelete} sx={ActionIconStyle} />
-          <Edit onClick={handleEdit} sx={ActionIconStyle} />
+          <Button
+            onClick={handleDelete}
+            startIcon={<Delete />}
+            sx={DeleteStyle}
+          >
+            Borrar
+          </Button>
+          <Button onClick={handleEdit} sx={EditStyle} startIcon={<Edit />}>
+            Editar
+          </Button>
         </DialogActions>
       </Dialog>
       <EditTaskModal
