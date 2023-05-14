@@ -8,7 +8,7 @@ const Finished = () => {
   const finishedTasks = data?.filter(task => task.inForce === false);
 
   return (
-    <div>
+    <div data-testid="finished-component">
       <TaskBoard tasks={finishedTasks} />
     </div>
   )

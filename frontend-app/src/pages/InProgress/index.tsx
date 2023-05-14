@@ -8,7 +8,7 @@ const InProgress = () => {
   const tasksInProgress = data?.filter(task => task.inForce === true);
 
   return (
-    <div>
+    <div data-testid="in-progress-component">
       <TaskBoard tasks={tasksInProgress} />
     </div>
   );

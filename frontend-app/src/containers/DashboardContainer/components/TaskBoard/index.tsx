@@ -16,6 +16,7 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ tasks }) => {
         gap: 2,
         p: 3,
       }}
+      data-testid="task-board-component"
     >
       {tasks?.map((task) => (
         <TaskCard key={task.id} task={task} />
