@@ -25,21 +25,55 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
   const [createTask] = useCreateTaskMutation();
   const { refetch } = useGetTasksQuery();
 
+  const [titleError, setTitleError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+
+  const validate = () => {
+    let valid = true;
+    if (!title) {
+      setTitleError("El título no puede estar vacío");
+      valid = false;
+    } else if (title.length > 80) {
+      setTitleError("El título no puede tener más de 80 caracteres");
+      valid = false;
+    } else {
+      setTitleError("");
+    }
+    if (!description) {
+      setDescriptionError("La descripción no puede estar vacía");
+      valid = false;
+    } else {
+      setDescriptionError("");
+    }
+    return valid;
+  };
+
   const handleSave = async () => {
     const taskToSave: TaskRequest = {
       title: title,
       description: description,
       inForce: true,
     };
-    await createTask(taskToSave);
-    refetch();
+
+    if (validate()) {
+      await createTask(taskToSave);
+      refetch();
+      setTitle("");
+      setDescription("");
+      onClose();
+    }
+  };
+
+  const handleClose = () => {
     setTitle("");
     setDescription("");
+    setTitleError("");
+    setDescriptionError("");
     onClose();
   };
 
   return (
-    <Dialog fullWidth open={open} onClose={onClose}>
+    <Dialog fullWidth open={open} onClose={handleClose}>
       <DialogTitle color={"primary"}>Nueva tarea</DialogTitle>
       <DialogContent dividers>
         <TextField
@@ -48,6 +82,8 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
           onChange={(e) => setTitle(e.target.value)}
           fullWidth
           sx={FieldTitleStyle}
+          error={Boolean(titleError)}
+          helperText={titleError}
         />
         <TextField
           label="Descripción"
@@ -56,10 +92,12 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ open, onClose }) => {
           fullWidth
           multiline
           sx={FieldDescriptionStyle}
+          error={Boolean(descriptionError)}
+          helperText={descriptionError}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
+        <Button onClick={handleClose}>Cancelar</Button>
         <Button onClick={handleSave}>Guardar</Button>
       </DialogActions>
     </Dialog>

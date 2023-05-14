@@ -34,6 +34,29 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   const [updateTask] = useUpdateTaskMutation();
   const { refetch } = useGetTasksQuery();
 
+  const [titleError, setTitleError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+
+  const validate = () => {
+    let valid = true;
+    if (!newTitle) {
+      setTitleError("El título no puede estar vacío");
+      valid = false;
+    } else if (newTitle.length > 80) {
+      setTitleError("El título no puede tener más de 80 caracteres");
+      valid = false;
+    } else {
+      setTitleError("");
+    }
+    if (!newDescription) {
+      setDescriptionError("La descripción no puede estar vacía");
+      valid = false;
+    } else {
+      setDescriptionError("");
+    }
+    return valid;
+  };
+
   const handleSave = async () => {
     const newTask: TaskRequest = {
       title: newTitle,
@@ -44,13 +67,25 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       id: task.id,
       data: newTask,
     };
-    await updateTask(taskToUpdate);
-    refetch();
+
+    if (validate()) {
+      await updateTask(taskToUpdate);
+      refetch();
+      onClose();
+    }
+  };
+
+  const handleClose = () => {
+    setNewTitle(title);
+    setNewDescription(description);
+    setInForce(inForce);
+    setTitleError("");
+    setDescriptionError("");
     onClose();
   };
 
   return (
-    <Dialog fullWidth open={open} onClose={onClose}>
+    <Dialog fullWidth open={open} onClose={handleClose}>
       <DialogTitle color={"primary"}>Editar tarea</DialogTitle>
       <DialogContent dividers>
         <TextField
@@ -59,6 +94,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
           onChange={(e) => setNewTitle(e.target.value)}
           fullWidth
           sx={FieldTitleStyle}
+          error={Boolean(titleError)}
+          helperText={titleError}
         />
         <TextField
           label="Descripción"
@@ -67,6 +104,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
           fullWidth
           multiline
           sx={FieldDescriptionStyle}
+          error={Boolean(descriptionError)}
+          helperText={descriptionError}
         />
         <FormControlLabel
           control={
@@ -80,7 +119,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancelar</Button>
+        <Button onClick={handleClose}>Cancelar</Button>
         <Button onClick={handleSave}>Guardar</Button>
       </DialogActions>
     </Dialog>
