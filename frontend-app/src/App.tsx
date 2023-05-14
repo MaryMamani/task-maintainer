@@ -1,6 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material";
-import React, { useState } from "react";
-import "./App.css";
+import React from "react";
 import AppContainer from "./containers/AppContainer";
 
 const theme = createTheme({
