@@ -7,7 +7,7 @@ import { DashboardContainerStyle, ContentBoxStyle } from "./style";
 
 const DashboardContainer = () => {
   return (
-    <Box sx={DashboardContainerStyle}>
+    <Box sx={DashboardContainerStyle} data-testid="dashboard-container">
       <Sidebar />
       <Box sx={ContentBoxStyle}>
         <BoardHeader />

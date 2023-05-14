@@ -5,7 +5,7 @@ import AppNavigator from "../../routes/AppNavigator";
 
 const AppContainer = () => (
   <BrowserRouter>
-    <Container maxWidth={false} disableGutters>
+    <Container maxWidth={false} disableGutters data-testid="app-container">
       <AppNavigator />
     </Container>
   </BrowserRouter>

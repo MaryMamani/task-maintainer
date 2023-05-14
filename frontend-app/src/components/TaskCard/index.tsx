@@ -57,7 +57,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
   return (
     <>
-      <Card onClick={handleOpen}>
+      <Card onClick={handleOpen} data-testid="task-card-component">
         <CardContent>
           <Typography sx={DateStyle}>{dateString}</Typography>
           <Typography sx={TitleStyle}>{title}</Typography>

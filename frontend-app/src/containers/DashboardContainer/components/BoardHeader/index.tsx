@@ -18,7 +18,7 @@ const BoardHeader = () => {
         <Typography variant="h4" color="#808082">
           Hi invitado
         </Typography>
-        <Button component={Link} to="/home">
+        <Button component={Link} to="/home" data-testid="exit-button">
           <Logout />
         </Button>
       </Box>
